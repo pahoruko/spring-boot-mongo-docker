@@ -2,6 +2,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: springappconfigmap
+  namespace: mongo-db
 data:
   username: springapp
   password: mongodb@123
@@ -11,6 +12,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: springappsecrets
+  namespace: mongo-db
 type: Opaque
 stringData:   # We can define multiple key value pairs.
   password: devdb@123
@@ -20,6 +22,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv-hostpath
+  namespace: mongo-db
 spec:
   storageClassName: manual
   capacity:
@@ -33,6 +36,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-hostpath
+  namespace: mongo-db
 spec:
   storageClassName: manual
   accessModes:
@@ -47,6 +51,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: springappdeployment
+  namespace: mongo-db
 spec:
   replicas: 2
   selector:
@@ -81,6 +86,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: springapp
+  namespace: mongo-db
 spec:
   selector:
     app: springapp
@@ -94,6 +100,7 @@ apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: mongodbrs
+  namespace: mongo-db
 spec:
   selector:
     matchLabels:
@@ -132,6 +139,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mongo
+  namespace: mongo-db
 spec:
   type: ClusterIP
   selector:
